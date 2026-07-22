@@ -6,7 +6,7 @@ export const Footer = () => {
   return (
     <footer data-testid="site-footer" className="relative border-t border-black/10 bg-[var(--st-black-3)]/70 py-12 backdrop-blur-md">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-7 px-6 lg:px-8">
-        <img src="/sovereigntree-emblem.jpg" alt="SovereignTree" className="h-14 w-14 rounded-full object-cover" />
+        <img src="/sovereigntree-logo.png" alt="SovereignTree" className="h-14 w-auto object-contain" />
 
         <nav className="flex flex-wrap items-center justify-center gap-x-7 gap-y-3">
           {NAV_LINKS.map((l) => (

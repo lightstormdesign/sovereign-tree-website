@@ -61,11 +61,11 @@ export const HeroContent = ({ active, mobile = false }) => {
     >
       <motion.img
         variants={mobile ? wipeVMobile : wipeV}
-        src="/sovereigntree-emblem.jpg"
+        src="/sovereigntree-logo.png"
         alt="SovereignTree"
         data-testid="hero-logo"
-        className="w-full rounded-full object-contain"
-        style={{ maxWidth: mobile ? "9rem" : "12rem" }}
+        className="w-full object-contain"
+        style={{ maxWidth: mobile ? "16rem" : "22rem" }}
       />
 
       <motion.div variants={mobile ? fadeMobile(0.55) : fade(0.55)} className="mt-8 flex flex-col items-center">
@@ -93,7 +93,23 @@ export const HeroContent = ({ active, mobile = false }) => {
         </p>
       </motion.div>
 
-      <motion.div variants={mobile ? fadeMobile(1.0) : fade(1.0)} className={mobile ? "mt-7" : "mt-9"}>
+      <motion.div
+        variants={mobile ? fadeMobile(0.8) : fade(0.8)}
+        className={`flex flex-col items-center ${mobile ? "mt-6" : "mt-8"}`}
+      >
+        <img
+          src="/sovereigntree-hero-founders.jpg"
+          alt="Trev & Sierra, Co-Founders"
+          data-testid="hero-founders-photo"
+          className="rounded-full border-2 border-[var(--st-gold)]/50 object-cover shadow-[0_8px_30px_-8px_rgba(63,77,42,0.4)]"
+          style={{ width: mobile ? "4.5rem" : "5.5rem", height: mobile ? "4.5rem" : "5.5rem" }}
+        />
+        <span className="font-accent mt-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--st-text-muted)]">
+          Trev &amp; Sierra · Co-Founders
+        </span>
+      </motion.div>
+
+      <motion.div variants={mobile ? fadeMobile(1.0) : fade(1.0)} className={mobile ? "mt-6" : "mt-7"}>
         <Link
           to={HERO_CTA.to}
           data-testid="hero-my-story-btn"

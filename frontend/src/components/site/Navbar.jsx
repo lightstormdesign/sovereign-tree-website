@@ -55,11 +55,8 @@ export const Navbar = () => {
         }`}
       >
         {!isPortalHero && (
-          <Link to="/" data-testid="nav-link-wordmark" className="flex items-center gap-2">
-            <img src="/sovereigntree-emblem.jpg" alt="" aria-hidden className="h-9 w-9 rounded-full object-cover" />
-            <span className="font-display text-lg uppercase tracking-[0.15em] text-[var(--st-gold)]">
-              SovereignTree
-            </span>
+          <Link to="/" data-testid="nav-link-wordmark" className="flex items-center">
+            <img src="/sovereigntree-logo.png" alt="SovereignTree" className="h-10 w-auto object-contain" />
           </Link>
         )}
         {!isPortalHero && (

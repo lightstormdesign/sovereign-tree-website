@@ -6,10 +6,9 @@ import { Fireflies } from "@/components/site/Fireflies";
 import { ORIGIN_STORY } from "@/data/site";
 
 // The Origin Story. Sierra's build used a pinned photo/video scroll-scrub —
-// this page has no equivalent SovereignTree photo/video assets yet, so it's
-// a clean, quietly-revealed article instead: same Reveal/Fireflies
-// components, same light/green brand system, simpler mechanism until
-// origin-story imagery is provided.
+// this page doesn't have that much SovereignTree footage yet, so it's a
+// clean, quietly-revealed article instead: same Reveal/Fireflies components,
+// same light/green brand system, simpler mechanism.
 export default function About() {
   return (
     <div data-testid="about-page" className="relative min-h-screen bg-[var(--st-black)]">
@@ -22,6 +21,15 @@ export default function About() {
           <h1 className="font-display mt-5 text-4xl font-normal text-[var(--st-text)] sm:text-5xl">
             The Origin Story
           </h1>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <img
+            src="/sovereigntree-about-founders.jpg"
+            alt="Trev and Sierra, SovereignTree co-founders"
+            data-testid="about-founders-photo"
+            className="mx-auto mt-10 max-w-xs rounded-2xl border border-[var(--st-gold)]/25 object-cover shadow-[0_20px_60px_-20px_rgba(63,77,42,0.35)] sm:max-w-sm"
+          />
         </Reveal>
 
         <div className="mt-14 space-y-7 text-left">
