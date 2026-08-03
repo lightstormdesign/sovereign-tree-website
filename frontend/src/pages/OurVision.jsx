@@ -1,8 +1,9 @@
 import { ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
-import { MISSION_PARAGRAPHS, WE_ARE_PILLARS, PITCH_DECK_URL, SKOOL_COMMUNITY_URL } from "@/data/site";
+import { MISSION_PARAGRAPHS, WE_ARE_PILLARS, SKOOL_COMMUNITY_URL } from "@/data/site";
 
 // New page — on the live sovereigntree.org site the mission copy and pitch
 // deck link live inline on the homepage; here they get their own dedicated
@@ -43,15 +44,13 @@ export default function OurVision() {
 
         <Reveal delay={0.25}>
           <div className="mt-14 flex flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-5">
-            <a
-              href={PITCH_DECK_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-testid="our-vision-pitch-deck-link"
+            <Link
+              to="/new-earth-council"
+              data-testid="our-vision-join-link"
               className="inline-flex items-center gap-2 rounded-full bg-[var(--st-gold)] px-7 py-3 font-body text-sm font-medium text-[var(--st-black)] transition-colors hover:bg-[var(--st-gold-accent)]"
             >
-              Take Action Now <ArrowUpRight size={15} />
-            </a>
+              Join the Council <ArrowUpRight size={15} />
+            </Link>
             <a
               href={SKOOL_COMMUNITY_URL}
               target="_blank"

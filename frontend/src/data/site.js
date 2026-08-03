@@ -6,6 +6,7 @@
 // Top-level site navigation — multi-page routes, NOT scroll-anchor targets.
 export const NAV_LINKS = [
   { label: "Home", to: "/" },
+  { label: "Join Us", to: "/new-earth-council" },
   { label: "Our Vision", to: "/our-vision" },
   { label: "About", to: "/about" },
   { label: "Music", to: "/music" },
@@ -28,8 +29,8 @@ export const MISSION_PARAGRAPHS = [
   "Thank YOU for helping birth this New Earth, friend. The time is Now. What are you waiting for?",
 ];
 
-// Shorter Hero-section excerpt (Home page overlay) — first mission paragraph only.
-export const HERO_BIO = MISSION_PARAGRAPHS[0];
+// Shorter Hero-section excerpt (mobile overlay only — desktop's hero shows
+// the first two MISSION_PARAGRAPHS directly, see HeroContent.jsx).
 export const HERO_BIO_MOBILE =
   "We are building a sanctuary for the visionaries & bridge builders of THE NEW EARTH — the ones crazy enough to think they can change the world, & devoted enough to do it.";
 
@@ -50,7 +51,30 @@ export const ORIGIN_STORY = [
 ];
 
 export const HERO_TAGLINE = SITE_TAGLINE;
-export const HERO_CTA = { label: "Our Vision", to: "/our-vision" };
+// Primary site-wide conversion goal is community signup, not just reading
+// the vision — CTA points at the New Earth Council join page.
+export const HERO_CTA = { label: "Join the Council", to: "/new-earth-council" };
+
+export const FOUNDERS_CAPTION = "Trev & Sierra | Co-Founders";
+
+// Phone/email capture — same copy as the popup live on sovereigntree.org
+// today, now embedded inline (Home + New Earth Council page) instead of an
+// interruptive modal. No backend wired up yet — see SignupForm.jsx, flagged
+// there for real SMS/CRM integration before launch.
+export const SIGNUP_HEADLINE = "Get the Free Guide for The New Earth 🌿";
+export const SIGNUP_SUBHEAD =
+  "The most important shifts we can make, individually and together. Feel free to print it out, put it on your fridge, keep it close.";
+export const SIGNUP_NOTE = "+ Occasional invites to our New Earth Councils, community updates, and music.";
+export const SIGNUP_CONSENT =
+  "I agree to receive SMS text messages from SovereignTree related to community updates, music, and New Earth Council invites. Message and data rates may apply. Reply STOP to opt out at any time.";
+export const SIGNUP_BUTTON_LABEL = "Send Me The Guide";
+
+// Non-intrusive bottom-right pitch-deck bubble — replaces the old inline
+// "Take Action Now" button per Trev's direction (that link/copy read as too
+// pushy for a first touch; the community-join CTAs above carry the primary
+// conversion goal instead).
+export const PITCH_DECK_BUBBLE_LABEL = "Get the Guide to Bridging New Earth";
+export const PITCH_DECK_BUBBLE_SUBLABEL = "FREE";
 
 // SovereignTree's own social presence — used site-wide (Footer, Contact,
 // Community, Tour).
@@ -67,6 +91,16 @@ export const MUSIC_SOCIALS = [
 // Real pitch deck (Google Drive) — the live site's "Take Action Now" CTA.
 // Featured on the new Our Vision page instead of embedded mid-scroll on Home.
 export const PITCH_DECK_URL = "https://drive.google.com/file/d/1U_T1Nu940ZaUYr6ZF1Tv8pCIoaBHrnCI/view?usp=drivesdk";
+
+// New Earth Council page copy — dedicated join page, primary conversion
+// goal of the site.
+export const NEC_HEADLINE = "Join the New Earth Council";
+export const NEC_SUBHEAD =
+  "Prayerformances, live gatherings, and a text-list straight from Trev & Sierra — new music, New Earth Council invites, and community updates, wherever you're rooted.";
+export const NEC_PARAGRAPHS = [
+  "A New Earth Council is a live gathering — part ceremony, part conversation, part music — where visionaries and bridge builders come together to dream, heal, and build the New Earth in real time.",
+  "We host them at festivals, retreats, and on the road with Trev & Sierra's tour. Drop your number below and you'll be the first to know when one's happening near you.",
+];
 
 // Skool community — real link live on sovereigntree.org today. Trev flagged
 // this will be swapped for a different community link soon (image + new URL

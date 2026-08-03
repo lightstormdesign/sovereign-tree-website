@@ -4,11 +4,13 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import OurVision from "@/pages/OurVision";
+import NewEarthCouncil from "@/pages/NewEarthCouncil";
 import Contact from "@/pages/Contact";
 import Music from "@/pages/Music";
 import Tour from "@/pages/Tour";
 import Community from "@/pages/Community";
 import { TrackingPixel } from "@/components/site/TrackingPixel";
+import { PitchDeckBubble } from "@/components/site/PitchDeckBubble";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -24,10 +26,12 @@ function App() {
       <BrowserRouter>
         <ScrollToTop />
         <TrackingPixel />
+        <PitchDeckBubble />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/our-vision" element={<OurVision />} />
+          <Route path="/new-earth-council" element={<NewEarthCouncil />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/music" element={<Music />} />
           <Route path="/tour" element={<Tour />} />

@@ -1,53 +1,33 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { HeroContent } from "./HeroContent";
 
 // Portal fade-out timing on tap — glow/dissolve, not a plain opacity fade.
-const PORTAL_FADE_IN_MS = 1500;
 const PORTAL_FADE_OUT_MS = 1300;
 
-// Mobile-only Portal -> Hero sequence. Tap-to-enter replaces the desktop's
-// scroll-scrub entirely — a fixed 100svh viewport, two phases driven by a
-// single tap. Unlike Sierra's build there's no separate transition clip (the
-// portal animation itself is the transition) and no portrait/logo/tap-label
-// PNG overlays — the SovereignTree portal video already has the emblem
-// baked in, so this only needs to lay the "Tap to Enter" label directly on
-// top of it.
+// Mobile-only Portal -> Hero sequence. Tap-to-enter, unlike desktop's
+// autoplay-and-crossfade — mobile never autoplays anything before the user
+// engages: the portal shows a static poster frame (no video, no data usage)
+// until tapped, and the hero video only starts playing inside the tap
+// handler itself (also the more reliable pattern for autoplay-with-sound
+// browser policies, since it's a direct user-gesture callback).
 export const MobilePortal = () => {
-  const [entered, setEntered] = useState(false); // on-load fade-in
-  const [tapped, setTapped] = useState(false); // portal -> hero
-  const [portalLoopBlocked, setPortalLoopBlocked] = useState(false);
+  const [tapped, setTapped] = useState(false);
   const [heroLoopBlocked, setHeroLoopBlocked] = useState(false);
-
   const enteringRef = useRef(false);
   const heroLoopRef = useRef(null);
-  const portalLoopRef = useRef(null);
-
-  // Fade-in starts immediately on mount (no delay) — the rAF hop just
-  // ensures the initial opacity:0 actually paints on its own frame first.
-  useEffect(() => {
-    const raf = requestAnimationFrame(() => setEntered(true));
-    return () => cancelAnimationFrame(raf);
-  }, []);
 
   const handleTap = () => {
     if (enteringRef.current) return;
     enteringRef.current = true;
     setTapped(true);
-  };
-
-  useEffect(() => {
     heroLoopRef.current?.play().catch(() => setHeroLoopBlocked(true));
-  }, []);
-  useEffect(() => {
-    portalLoopRef.current?.play().catch(() => setPortalLoopBlocked(true));
-  }, []);
+  };
 
   const pe = (on) => (on ? "auto" : "none");
 
   return (
     <section data-testid="mobile-portal" className="relative w-full overflow-hidden bg-[var(--st-black)]" style={{ height: "100svh" }}>
-      {/* Layer 0: Hero loop background — always playing beneath, revealed
-          the moment the portal is tapped. */}
+      {/* Layer 0: Hero loop background — only starts playing once tapped. */}
       <div className="absolute inset-0 bg-[var(--st-black)]" style={{ opacity: tapped ? 1 : 0, transition: `opacity ${PORTAL_FADE_OUT_MS}ms ease-out` }}>
         {heroLoopBlocked ? (
           <img
@@ -66,15 +46,14 @@ export const MobilePortal = () => {
             muted
             loop
             playsInline
-            preload="auto"
+            preload="none"
             tabIndex={-1}
           />
         )}
       </div>
 
-      {/* Layer 1: Portal — the SovereignTree animation, tap target. Fades
-          IN on mount (1.5s), fades OUT on tap via a glow/dissolve over
-          1.3s. The poster/fallback image covers any loading delay. */}
+      {/* Layer 1: Portal — a static poster frame, tap target. No video
+          autoplay on mobile at all; fades OUT on tap via a glow/dissolve. */}
       <button
         type="button"
         onClick={handleTap}
@@ -82,35 +61,18 @@ export const MobilePortal = () => {
         aria-label="Tap to enter"
         className="absolute inset-0 z-10 h-full w-full cursor-pointer"
         style={{
-          opacity: !entered ? 0 : tapped ? 0 : 1,
+          opacity: tapped ? 0 : 1,
           filter: tapped ? "brightness(1.15) blur(20px)" : "brightness(1) blur(0px)",
-          pointerEvents: pe(!tapped && entered),
-          transition: tapped
-            ? `opacity ${PORTAL_FADE_OUT_MS}ms ease-out, filter ${PORTAL_FADE_OUT_MS}ms ease-out`
-            : `opacity ${PORTAL_FADE_IN_MS}ms ease-out`,
+          pointerEvents: pe(!tapped),
+          transition: `opacity ${PORTAL_FADE_OUT_MS}ms ease-out, filter ${PORTAL_FADE_OUT_MS}ms ease-out`,
         }}
       >
-        {portalLoopBlocked ? (
-          <img
-            data-testid="mobile-portal-loop-poster"
-            className="absolute inset-0 h-full w-full object-cover"
-            src="/sovereigntree-mobile-portal-loop_poster.jpg"
-            alt=""
-          />
-        ) : (
-          <video
-            ref={portalLoopRef}
-            data-testid="mobile-portal-loop-video"
-            className="absolute inset-0 h-full w-full object-cover"
-            src="/sovereigntree-mobile-portal-loop.mp4"
-            poster="/sovereigntree-mobile-portal-loop_poster.jpg"
-            muted
-            loop
-            playsInline
-            preload="auto"
-            tabIndex={-1}
-          />
-        )}
+        <img
+          data-testid="mobile-portal-loop-poster"
+          className="absolute inset-0 h-full w-full object-cover"
+          src="/sovereigntree-mobile-portal-loop_poster.jpg"
+          alt=""
+        />
 
         {/* "Tap to Enter" — green, not white: the portal footage's own
             background is white/cream, so white text would disappear
