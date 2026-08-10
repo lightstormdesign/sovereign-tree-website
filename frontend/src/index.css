@@ -195,6 +195,14 @@ body {
   100% { transform: translateY(-14px); opacity: 0; }
 }
 
+/* Mobile portal's tap affordance — a ring expanding outward and fading,
+   like a tap ripple, around a static center dot. Two rings staggered
+   0.6s apart so a new ripple starts before the previous one fully fades. */
+@keyframes tap-ripple {
+  0% { transform: scale(0.5); opacity: 0.9; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
 /* Album page tap indicator: approaches from the right with a zoom-in, then
    taps repeatedly before resetting for the next loop. */
 @keyframes tap-approach {

@@ -23,7 +23,10 @@ function ScrollToTop() {
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      {/* PUBLIC_URL is "" in dev and the repo subpath ("/sovereign-tree-website")
+          in production builds (from package.json's "homepage") — GitHub
+          Pages serves this as a project site, not from the domain root. */}
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <ScrollToTop />
         <TrackingPixel />
         <PitchDeckBubble />

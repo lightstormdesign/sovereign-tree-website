@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#f7f5ef" />
         <meta name="description" content="SovereignTree — a sanctuary for the visionaries & bridge builders of the New Earth. Regenerative Community. Luxury Retreat Center. School of Sovereignty." />
-        <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="512x512" href="%PUBLIC_URL%/favicon-512.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32.png" />
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
         <!-- Open Graph / social share -->
         <meta property="og:type" content="website" />
         <meta property="og:site_name" content="SovereignTree" />
@@ -32,6 +32,20 @@
     </head>
     <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
+        <!-- Decodes the path GitHub Pages' 404.html redirect encoded into
+             the query string (see public/404.html), before React Router
+             mounts, so deep links / page refreshes work on Pages' static
+             hosting. -->
+        <script type="text/javascript">
+          (function (l) {
+            if (l.search[1] === "/") {
+              var decoded = l.search.slice(1).split("&").map(function (s) {
+                return s.replace(/~and~/g, "&");
+              }).join("?");
+              window.history.replaceState(null, null, l.pathname.slice(0, -1) + decoded + l.hash);
+            }
+          })(window.location);
+        </script>
         <div id="root"></div>
     </body>
 </html>

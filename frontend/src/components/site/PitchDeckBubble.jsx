@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { X, ArrowUpRight } from "lucide-react";
 import { PITCH_DECK_URL, PITCH_DECK_BUBBLE_LABEL, PITCH_DECK_BUBBLE_SUBLABEL } from "@/data/site";
+import { PORTAL_COMPLETE_EVENT, isPortalComplete } from "@/utils/portalComplete";
 
 const APPEAR_DELAY_MS = 3000;
 const DISMISS_KEY = "st-pitch-deck-bubble-dismissed";
 
 // Non-intrusive bottom-right bubble linking to the pitch deck — replaces the
-// old inline "Take Action Now" button. Appears a few seconds after load
-// (never on first paint), stays dismissed for the rest of the browser
-// session once closed, and doesn't block anything underneath it.
+// old inline "Take Action Now" button. Never appears on first paint, and on
+// the Home page specifically it waits for the Portal -> Hero animation to
+// actually finish (not just a flat timer from page load) before starting
+// its own appear delay — otherwise it'd pop up mid-portal, competing with
+// the thing the visitor is supposed to be watching. On every other page
+// (where there's no portal to wait for) it just uses the flat delay.
 export const PitchDeckBubble = () => {
+  const location = useLocation();
   const [show, setShow] = useState(false);
   const [dismissed, setDismissed] = useState(() => {
     try {
@@ -21,9 +27,23 @@ export const PitchDeckBubble = () => {
 
   useEffect(() => {
     if (dismissed) return;
-    const t = setTimeout(() => setShow(true), APPEAR_DELAY_MS);
-    return () => clearTimeout(t);
-  }, [dismissed]);
+
+    const waitingOnPortal = location.pathname === "/" && !isPortalComplete();
+    if (!waitingOnPortal) {
+      const t = setTimeout(() => setShow(true), APPEAR_DELAY_MS);
+      return () => clearTimeout(t);
+    }
+
+    let t;
+    const onPortalComplete = () => {
+      t = setTimeout(() => setShow(true), APPEAR_DELAY_MS);
+    };
+    window.addEventListener(PORTAL_COMPLETE_EVENT, onPortalComplete);
+    return () => {
+      window.removeEventListener(PORTAL_COMPLETE_EVENT, onPortalComplete);
+      clearTimeout(t);
+    };
+  }, [dismissed, location.pathname]);
 
   const handleDismiss = () => {
     setShow(false);
