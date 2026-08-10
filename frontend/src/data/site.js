@@ -72,9 +72,11 @@ export const SIGNUP_BUTTON_LABEL = "Send Me The Guide";
 // Non-intrusive bottom-right pitch-deck bubble — replaces the old inline
 // "Take Action Now" button per Trev's direction (that link/copy read as too
 // pushy for a first touch; the community-join CTAs above carry the primary
-// conversion goal instead).
-export const PITCH_DECK_BUBBLE_LABEL = "Get the Guide to Bridging New Earth";
-export const PITCH_DECK_BUBBLE_SUBLABEL = "FREE";
+// conversion goal instead). Deliberately doesn't say "guide" — that word is
+// reserved for the phone/email lead magnet (SIGNUP_HEADLINE below); this
+// links straight to the pitch deck PDF, a different thing.
+export const PITCH_DECK_BUBBLE_LABEL = "Read Our Pitch Deck";
+export const PITCH_DECK_BUBBLE_SUBLABEL = "See the Vision";
 
 // SovereignTree's own social presence — used site-wide (Footer, Contact,
 // Community, Tour).
@@ -93,14 +95,23 @@ export const MUSIC_SOCIALS = [
 export const PITCH_DECK_URL = "https://drive.google.com/file/d/1U_T1Nu940ZaUYr6ZF1Tv8pCIoaBHrnCI/view?usp=drivesdk";
 
 // New Earth Council page copy — dedicated join page, primary conversion
-// goal of the site.
-export const NEC_HEADLINE = "Join the New Earth Council";
+// goal of the site. This is deliberately a distinct thing from the "guide"
+// lead magnet (SIGNUP_HEADLINE below, embedded on Home) — Councils are free
+// live gatherings, not a download.
+export const NEC_HEADLINE = "Join a New Earth Council";
 export const NEC_SUBHEAD =
-  "Prayerformances, live gatherings, and a text-list straight from Trev & Sierra — new music, New Earth Council invites, and community updates, wherever you're rooted.";
+  "Free, live gatherings where we come together to embody the change we wish to see — sacred circle, shared voice, and the shifts we can make, individually and collectively, to bridge the New Earth.";
 export const NEC_PARAGRAPHS = [
-  "A New Earth Council is a live gathering — part ceremony, part conversation, part music — where visionaries and bridge builders come together to dream, heal, and build the New Earth in real time.",
-  "We host them at festivals, retreats, and on the road with Trev & Sierra's tour. Drop your number below and you'll be the first to know when one's happening near you.",
+  "A New Earth Council is free to attend — part ceremony, part conversation, part music. We gather in sacred circle, because that circle is our true power as humanity, as people: the chance to show up, be witnessed, and share your voice.",
+  "It's one part of being part of SovereignTree — a movement of sovereignty, regeneration, and the empowerment of humanity, building toward an eco-village one day. Along the way, we're mostly just talking about the shifts we can make — individually and collectively — to bridge the New Earth.",
+  "Drop your number below and we'll send inspiration, invites to upcoming Councils, and community updates — wherever you're rooted.",
 ];
+
+// New Earth Council's own signup copy — reuses the SignupForm component but
+// with copy specific to Councils, not the generic "guide" lead magnet.
+export const NEC_SIGNUP_HEADLINE = "Get Council Invites";
+export const NEC_SIGNUP_SUBHEAD = "Be the first to know when a New Earth Council is gathering near you.";
+export const NEC_SIGNUP_BUTTON_LABEL = "Join the Circle";
 
 // Skool community — real link live on sovereigntree.org today. Trev flagged
 // this will be swapped for a different community link soon (image + new URL

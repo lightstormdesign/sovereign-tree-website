@@ -2,11 +2,19 @@ import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { Reveal } from "@/components/site/Reveal";
 import { SignupForm } from "@/components/site/SignupForm";
-import { NEC_HEADLINE, NEC_SUBHEAD, NEC_PARAGRAPHS } from "@/data/site";
+import {
+  NEC_HEADLINE,
+  NEC_SUBHEAD,
+  NEC_PARAGRAPHS,
+  NEC_SIGNUP_HEADLINE,
+  NEC_SIGNUP_SUBHEAD,
+  NEC_SIGNUP_BUTTON_LABEL,
+} from "@/data/site";
 
-// Dedicated join page — the site's primary conversion goal. Same phone/email
-// capture as the Home page's embedded form, with more context up top about
-// what a New Earth Council actually is.
+// Dedicated join page — the site's primary conversion goal. Its signup form
+// is deliberately its own thing (Council invites), not the Home page's
+// "guide" lead magnet relabeled — different promise, so it gets its own
+// copy passed into the shared SignupForm.
 export default function NewEarthCouncil() {
   return (
     <div className="relative min-h-screen bg-[var(--st-black)]">
@@ -41,7 +49,13 @@ export default function NewEarthCouncil() {
 
         <Reveal delay={0.25}>
           <div className="mt-14">
-            <SignupForm />
+            <SignupForm
+              headline={NEC_SIGNUP_HEADLINE}
+              subhead={NEC_SIGNUP_SUBHEAD}
+              note=""
+              buttonLabel={NEC_SIGNUP_BUTTON_LABEL}
+              successMessage="You're in the circle — see you at the next gathering."
+            />
           </div>
         </Reveal>
       </main>

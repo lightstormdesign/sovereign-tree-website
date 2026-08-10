@@ -72,8 +72,8 @@ export const HeroContent = ({ active, mobile = false }) => {
             src="/sovereigntree-hero-founders.jpg"
             alt={FOUNDERS_CAPTION}
             data-testid="hero-founders-photo"
-            className="rounded-full border-2 border-[var(--st-gold)]/50 object-cover shadow-[0_8px_30px_-8px_rgba(63,77,42,0.4)]"
-            style={{ width: "4.5rem", height: "4.5rem" }}
+            className="rounded-xl border border-[var(--st-gold)]/40 object-cover shadow-[0_10px_35px_-10px_rgba(63,77,42,0.45)]"
+            style={{ width: "11.5rem", height: "15rem" }}
           />
           <span className="font-accent mt-2 text-[0.65rem] uppercase tracking-[0.2em] text-[var(--st-text-muted)]">
             {FOUNDERS_CAPTION}
@@ -93,35 +93,41 @@ export const HeroContent = ({ active, mobile = false }) => {
     );
   }
 
-  // Desktop: image-left / content-right split, matching sovereigntree.org's
-  // actual homepage layout (huge portrait bleeding off the left edge, "We
-  // Are.." wordmark + pillars + mission copy in the right column) — the
-  // Sierra template's centered-stack layout is desktop-only replaced here.
+  // Desktop: matches sovereigntree.org's actual homepage layout — verified
+  // by inspecting the live site's DOM: the animated video is a full-bleed
+  // background across the ENTIRE hero (not just behind a small portal
+  // circle), and the founders photo sits on top as an inset panel — not
+  // edge-to-edge — at roughly left:18%, top:6%, width:29%, height:71% of
+  // the viewport. That inset (not a bleeding full-height panel) is exactly
+  // what keeps the video's own owl/branch decoration and drifting birds
+  // visible around the photo instead of being covered by it.
   return (
-    <motion.div initial="hidden" animate={ctl} className="relative flex h-full w-full items-stretch">
-      {/* Left: huge portrait, bleeds off the left edge and fades into the
-          hero video on its right edge instead of a hard rectangle line. */}
-      <motion.div variants={slideIn} className="relative h-full w-[42%] shrink-0">
+    <motion.div initial="hidden" animate={ctl} className="relative h-full w-full">
+      <motion.div
+        variants={slideIn}
+        className="absolute"
+        style={{ left: "18%", top: "6%", width: "29%", height: "71%" }}
+      >
         <img
           src="/sovereigntree-hero-founders.jpg"
           alt={FOUNDERS_CAPTION}
           data-testid="hero-founders-photo"
-          className="h-full w-full object-cover"
-          style={{
-            WebkitMaskImage: "linear-gradient(to right, #000 78%, transparent 100%)",
-            maskImage: "linear-gradient(to right, #000 78%, transparent 100%)",
-          }}
+          className="h-full w-full rounded-lg object-cover shadow-[0_20px_60px_-15px_rgba(43,39,23,0.45)]"
         />
         <span
-          className="font-accent absolute bottom-10 left-8 text-[0.65rem] uppercase tracking-[0.2em] text-white"
+          className="font-accent absolute bottom-4 left-4 text-[0.65rem] uppercase tracking-[0.2em] text-white"
           style={{ textShadow: "0 2px 12px rgba(0,0,0,0.8), 0 1px 4px rgba(0,0,0,0.7)" }}
         >
           {FOUNDERS_CAPTION}
         </span>
       </motion.div>
 
-      {/* Right: wordmark, pillars, mission copy, CTA */}
-      <div className="relative flex flex-1 flex-col items-start justify-center px-8 pr-[8%] text-left lg:px-12">
+      {/* Right: wordmark, pillars, mission copy, CTA — starts clear of the
+          photo panel above (which ends at ~47% width). */}
+      <div
+        className="relative flex h-full flex-col items-start justify-center pr-[6%] text-left"
+        style={{ paddingLeft: "51%" }}
+      >
         <motion.img
           variants={wipeV}
           src="/sovereigntree-logo.png"
