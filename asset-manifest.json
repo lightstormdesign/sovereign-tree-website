@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/sovereign-tree-website/static/css/main.70d007a7.css",
+    "main.js": "/sovereign-tree-website/static/js/main.4f6bfe79.js",
+    "index.html": "/sovereign-tree-website/index.html",
+    "main.70d007a7.css.map": "/sovereign-tree-website/static/css/main.70d007a7.css.map",
+    "main.4f6bfe79.js.map": "/sovereign-tree-website/static/js/main.4f6bfe79.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.70d007a7.css",
+    "static/js/main.4f6bfe79.js"
+  ]
+}
