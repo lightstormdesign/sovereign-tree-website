@@ -16,6 +16,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "postbuild": "node scripts/cloudflare-postbuild.js",
     "test": "craco test"
   },
   "browserslist": {
